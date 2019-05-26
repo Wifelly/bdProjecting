@@ -1,0 +1,47 @@
+CREATE TABLE TABLE IF NOT EXISTS Users (
+    user_id	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  vkUser_id INTEGER NOT NULL UNIQUE,
+	  name TEXT,
+	  surname TEXT
+);
+
+CREATE TABLE TABLE IF NOT EXISTS Categorys (
+	  category_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE TABLE IF NOT EXISTS Subscriptions (
+	  subscription_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  user_id INTEGER NOT NULL,
+	  category_id INTEGER NOT NULL,
+	  FOREIGN KEY(user_id) 
+        REFERENCES Users(user_id),
+	  FOREIGN KEY(category_id) 
+        REFERENCES Category(category_id)
+);
+
+CREATE TABLE TABLE IF NOT EXISTS Subscriptions (
+	  subscription_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  user_id INTEGER NOT NULL,
+	  category_id INTEGER NOT NULL,
+	  FOREIGN KEY(user_id) 
+        REFERENCES Users(user_id),
+	  FOREIGN KEY(category_id) 
+        REFERENCES Category(category_id)
+);
+
+CREATE TABLE TABLE IF NOT EXISTS Publications (
+	  publication_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  text TEXT,
+	  category_id	INTEGER NOT NULL,
+	  FOREIGN KEY(category_id) 
+      REFERENCES Category(category_id)
+);
+
+CREATE TABLE TABLE IF NOT EXISTS Keywords (
+	  keyword_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+	  name TEXT NOT NULL,
+	  publication_id INTEGER NOT NULL,
+	  FOREIGN KEY(publication_id) 
+        REFERENCES Publications(publication_id)
+)
